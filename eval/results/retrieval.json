@@ -1,10 +1,10 @@
 {
   "metadata": {
-    "utc": "2026-09-24T13:17:35.075752+00:00",
+    "utc": "2026-09-24T13:25:14.070907+00:00",
     "mode": "retrieval",
     "judge": "none",
-    "git_commit": "9c94357f303f0725f0788f6d32a54529d1a820cf",
-    "working_tree_dirty": true,
+    "git_commit": "04bb465ef7ea520230070c9c89f97bb2b36779e5",
+    "working_tree_dirty": false,
     "dataset_sha256": "45461f2a261d170cebaec3ebe5a286d13312e80b558ad702343167bb2f60aa09",
     "dataset_cases": 18,
     "index_sha256": "f592e824fa9bf1c7a6a3d63a4642e80dd107eb81b196e103b0566a9f4581c0fa",
@@ -54,7 +54,7 @@
       "recall_at_3_n": 12,
       "reciprocal_rank": 0.9444444444444444,
       "reciprocal_rank_n": 12,
-      "latency_ms": 23.205833333333334,
+      "latency_ms": 20.58416666666667,
       "latency_ms_n": 12,
       "correctness": null,
       "correctness_n": 0,
@@ -72,7 +72,7 @@
       "recall_at_3_n": 12,
       "reciprocal_rank": 0.9444444444444444,
       "reciprocal_rank_n": 12,
-      "latency_ms": 131.42416666666668,
+      "latency_ms": 140.2,
       "latency_ms_n": 12,
       "correctness": null,
       "correctness_n": 0,
@@ -87,7 +87,7 @@
   "improved_minus_baseline": {
     "recall_at_3": 0.0,
     "reciprocal_rank": 0.0,
-    "latency_ms": 108.21833333333335
+    "latency_ms": 119.61583333333331
   },
   "results": [
     {
@@ -100,7 +100,7 @@
         "retrieval.md",
         "reranking.md"
       ],
-      "latency_ms": 148.91,
+      "latency_ms": 126.09,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -114,7 +114,7 @@
         "reranking.md",
         "catalog.md"
       ],
-      "latency_ms": 10.83,
+      "latency_ms": 12.56,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -128,7 +128,7 @@
         "ingestion.md",
         "reranking.md"
       ],
-      "latency_ms": 10.43,
+      "latency_ms": 10.4,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -142,7 +142,7 @@
         "ingestion.md",
         "chunking.md"
       ],
-      "latency_ms": 10.56,
+      "latency_ms": 10.29,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -156,7 +156,7 @@
         "evaluation.md",
         "retrieval.md"
       ],
-      "latency_ms": 10.35,
+      "latency_ms": 10.36,
       "recall_at_3": 1.0,
       "reciprocal_rank": 0.3333333333333333
     },
@@ -170,7 +170,7 @@
         "operations.md",
         "retrieval.md"
       ],
-      "latency_ms": 13.07,
+      "latency_ms": 12.18,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -184,7 +184,7 @@
         "chunking.md",
         "ingestion.md"
       ],
-      "latency_ms": 12.38,
+      "latency_ms": 11.08,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -198,7 +198,7 @@
         "reranking.md",
         "ingestion.md"
       ],
-      "latency_ms": 11.55,
+      "latency_ms": 10.17,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -212,7 +212,7 @@
         "reranking.md",
         "ingestion.md"
       ],
-      "latency_ms": 17.58,
+      "latency_ms": 11.14,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -226,7 +226,7 @@
         "operations.md",
         "ingestion.md"
       ],
-      "latency_ms": 11.24,
+      "latency_ms": 11.29,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -240,7 +240,7 @@
         "ingestion.md",
         "safety.md"
       ],
-      "latency_ms": 11.59,
+      "latency_ms": 11.14,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -296,7 +296,7 @@
         "ingestion.md",
         "evaluation.md"
       ],
-      "latency_ms": 9.98,
+      "latency_ms": 10.31,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -310,7 +310,7 @@
         "retrieval.md",
         "reranking.md"
       ],
-      "latency_ms": 126.86,
+      "latency_ms": 229.52,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -324,7 +324,7 @@
         "reranking.md",
         "catalog.md"
       ],
-      "latency_ms": 115.91,
+      "latency_ms": 109.31,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -338,7 +338,7 @@
         "ingestion.md",
         "reranking.md"
       ],
-      "latency_ms": 120.93,
+      "latency_ms": 116.76,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -352,7 +352,7 @@
         "ingestion.md",
         "chunking.md"
       ],
-      "latency_ms": 124.19,
+      "latency_ms": 129.78,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -366,7 +366,7 @@
         "evaluation.md",
         "retrieval.md"
       ],
-      "latency_ms": 147.11,
+      "latency_ms": 175.32,
       "recall_at_3": 1.0,
       "reciprocal_rank": 0.3333333333333333
     },
@@ -380,7 +380,7 @@
         "operations.md",
         "retrieval.md"
       ],
-      "latency_ms": 161.74,
+      "latency_ms": 166.46,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -394,7 +394,7 @@
         "chunking.md",
         "ingestion.md"
       ],
-      "latency_ms": 151.26,
+      "latency_ms": 138.17,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -408,7 +408,7 @@
         "reranking.md",
         "ingestion.md"
       ],
-      "latency_ms": 126.64,
+      "latency_ms": 120.24,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -422,7 +422,7 @@
         "reranking.md",
         "ingestion.md"
       ],
-      "latency_ms": 137.33,
+      "latency_ms": 131.02,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -436,7 +436,7 @@
         "operations.md",
         "ingestion.md"
       ],
-      "latency_ms": 121.78,
+      "latency_ms": 120.04,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -450,7 +450,7 @@
         "ingestion.md",
         "safety.md"
       ],
-      "latency_ms": 122.48,
+      "latency_ms": 121.45,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     },
@@ -506,7 +506,7 @@
         "ingestion.md",
         "evaluation.md"
       ],
-      "latency_ms": 120.86,
+      "latency_ms": 124.33,
       "recall_at_3": 1.0,
       "reciprocal_rank": 1.0
     }
