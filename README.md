@@ -1,4 +1,4 @@
-# RAG Agent: inspectable answers, tools, and evaluations
+# RAG Agent: inspectable answers, tools, & evaluations
 
 A Python portfolio project that answers questions about a small engineering knowledge
 base and looks up fictional service ownership in a separate SQLite catalog. An explicit
