@@ -1,0 +1,514 @@
+{
+  "metadata": {
+    "utc": "2026-09-24T13:17:35.075752+00:00",
+    "mode": "retrieval",
+    "judge": "none",
+    "git_commit": "9c94357f303f0725f0788f6d32a54529d1a820cf",
+    "working_tree_dirty": true,
+    "dataset_sha256": "45461f2a261d170cebaec3ebe5a286d13312e80b558ad702343167bb2f60aa09",
+    "dataset_cases": 18,
+    "index_sha256": "f592e824fa9bf1c7a6a3d63a4642e80dd107eb81b196e103b0566a9f4581c0fa",
+    "configuration": {
+      "ollama_url": "redacted",
+      "model": "qwen2.5:3b",
+      "judge_model": "qwen2.5:3b",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "reranker_model": "cross-encoder/ms-marco-MiniLM-L6-v2",
+      "index": ".rag/index",
+      "memory": ".rag/preferences.sqlite3",
+      "traces": ".rag/traces"
+    },
+    "generator_digest": null,
+    "judge_digest": null,
+    "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "reranker_revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+    "python": "3.12.14",
+    "platform": "macOS-14.2.1-arm64-arm-64bit",
+    "packages": {
+      "langgraph": "1.2.12",
+      "rank-bm25": "0.2.2",
+      "sentence-transformers": "5.7.0",
+      "numpy": "2.5.3",
+      "torch": "2.14.0"
+    },
+    "experiments": [
+      {
+        "name": "baseline",
+        "rerank": false,
+        "candidate_k": 8,
+        "top_k": 3
+      },
+      {
+        "name": "improved",
+        "rerank": true,
+        "candidate_k": 8,
+        "top_k": 3
+      }
+    ]
+  },
+  "summary": {
+    "baseline": {
+      "cases": 18,
+      "completed": 12,
+      "recall_at_3": 1.0,
+      "recall_at_3_n": 12,
+      "reciprocal_rank": 0.9444444444444444,
+      "reciprocal_rank_n": 12,
+      "latency_ms": 23.205833333333334,
+      "latency_ms_n": 12,
+      "correctness": null,
+      "correctness_n": 0,
+      "groundedness": null,
+      "groundedness_n": 0,
+      "relevance": null,
+      "relevance_n": 0,
+      "route_correct": null,
+      "route_correct_n": 0
+    },
+    "improved": {
+      "cases": 18,
+      "completed": 12,
+      "recall_at_3": 1.0,
+      "recall_at_3_n": 12,
+      "reciprocal_rank": 0.9444444444444444,
+      "reciprocal_rank_n": 12,
+      "latency_ms": 131.42416666666668,
+      "latency_ms_n": 12,
+      "correctness": null,
+      "correctness_n": 0,
+      "groundedness": null,
+      "groundedness_n": 0,
+      "relevance": null,
+      "relevance_n": 0,
+      "route_correct": null,
+      "route_correct_n": 0
+    }
+  },
+  "improved_minus_baseline": {
+    "recall_at_3": 0.0,
+    "reciprocal_rank": 0.0,
+    "latency_ms": 108.21833333333335
+  },
+  "results": [
+    {
+      "configuration": "baseline",
+      "case_id": "ingestion",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "ingestion.md",
+        "retrieval.md",
+        "reranking.md"
+      ],
+      "latency_ms": 148.91,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "rebuild",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "ingestion.md",
+        "reranking.md",
+        "catalog.md"
+      ],
+      "latency_ms": 10.83,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "overlap",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "chunking.md",
+        "ingestion.md",
+        "reranking.md"
+      ],
+      "latency_ms": 10.43,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "hybrid",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "retrieval.md",
+        "ingestion.md",
+        "chunking.md"
+      ],
+      "latency_ms": 10.56,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "fusion",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "reranking.md",
+        "evaluation.md",
+        "retrieval.md"
+      ],
+      "latency_ms": 10.35,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 0.3333333333333333
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "reranker",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "reranking.md",
+        "operations.md",
+        "retrieval.md"
+      ],
+      "latency_ms": 13.07,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "latency",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "reranking.md",
+        "chunking.md",
+        "ingestion.md"
+      ],
+      "latency_ms": 12.38,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "recall",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "evaluation.md",
+        "reranking.md",
+        "ingestion.md"
+      ],
+      "latency_ms": 11.55,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "judge",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "evaluation.md",
+        "reranking.md",
+        "ingestion.md"
+      ],
+      "latency_ms": 17.58,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "memory",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "memory.md",
+        "operations.md",
+        "ingestion.md"
+      ],
+      "latency_ms": 11.24,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "trace",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "observability.md",
+        "ingestion.md",
+        "safety.md"
+      ],
+      "latency_ms": 11.59,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "tool_owner",
+      "status": "not_applicable",
+      "judgment_status": "not_requested",
+      "reason": "Requires agent routing or history"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "tool_tier",
+      "status": "not_applicable",
+      "judgment_status": "not_requested",
+      "reason": "Requires agent routing or history"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "injection",
+      "status": "not_applicable",
+      "judgment_status": "not_requested",
+      "reason": "Requires agent routing or history"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "tool_abuse",
+      "status": "not_applicable",
+      "judgment_status": "not_requested",
+      "reason": "Requires agent routing or history"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "unknown",
+      "status": "not_applicable",
+      "judgment_status": "not_requested",
+      "reason": "Requires agent routing or history"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "followup",
+      "status": "not_applicable",
+      "judgment_status": "not_requested",
+      "reason": "Requires agent routing or history"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "preference",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "chunking.md",
+        "ingestion.md",
+        "evaluation.md"
+      ],
+      "latency_ms": 9.98,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "improved",
+      "case_id": "ingestion",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "ingestion.md",
+        "retrieval.md",
+        "reranking.md"
+      ],
+      "latency_ms": 126.86,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "improved",
+      "case_id": "rebuild",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "ingestion.md",
+        "reranking.md",
+        "catalog.md"
+      ],
+      "latency_ms": 115.91,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "improved",
+      "case_id": "overlap",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "chunking.md",
+        "ingestion.md",
+        "reranking.md"
+      ],
+      "latency_ms": 120.93,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "improved",
+      "case_id": "hybrid",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "retrieval.md",
+        "ingestion.md",
+        "chunking.md"
+      ],
+      "latency_ms": 124.19,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "improved",
+      "case_id": "fusion",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "reranking.md",
+        "evaluation.md",
+        "retrieval.md"
+      ],
+      "latency_ms": 147.11,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 0.3333333333333333
+    },
+    {
+      "configuration": "improved",
+      "case_id": "reranker",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "reranking.md",
+        "operations.md",
+        "retrieval.md"
+      ],
+      "latency_ms": 161.74,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "improved",
+      "case_id": "latency",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "reranking.md",
+        "chunking.md",
+        "ingestion.md"
+      ],
+      "latency_ms": 151.26,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "improved",
+      "case_id": "recall",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "evaluation.md",
+        "reranking.md",
+        "ingestion.md"
+      ],
+      "latency_ms": 126.64,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "improved",
+      "case_id": "judge",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "evaluation.md",
+        "reranking.md",
+        "ingestion.md"
+      ],
+      "latency_ms": 137.33,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "improved",
+      "case_id": "memory",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "memory.md",
+        "operations.md",
+        "ingestion.md"
+      ],
+      "latency_ms": 121.78,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "improved",
+      "case_id": "trace",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "observability.md",
+        "ingestion.md",
+        "safety.md"
+      ],
+      "latency_ms": 122.48,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "configuration": "improved",
+      "case_id": "tool_owner",
+      "status": "not_applicable",
+      "judgment_status": "not_requested",
+      "reason": "Requires agent routing or history"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "tool_tier",
+      "status": "not_applicable",
+      "judgment_status": "not_requested",
+      "reason": "Requires agent routing or history"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "injection",
+      "status": "not_applicable",
+      "judgment_status": "not_requested",
+      "reason": "Requires agent routing or history"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "tool_abuse",
+      "status": "not_applicable",
+      "judgment_status": "not_requested",
+      "reason": "Requires agent routing or history"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "unknown",
+      "status": "not_applicable",
+      "judgment_status": "not_requested",
+      "reason": "Requires agent routing or history"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "followup",
+      "status": "not_applicable",
+      "judgment_status": "not_requested",
+      "reason": "Requires agent routing or history"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "preference",
+      "status": "completed",
+      "judgment_status": "not_requested",
+      "sources": [
+        "chunking.md",
+        "ingestion.md",
+        "evaluation.md"
+      ],
+      "latency_ms": 120.86,
+      "recall_at_3": 1.0,
+      "reciprocal_rank": 1.0
+    }
+  ]
+}

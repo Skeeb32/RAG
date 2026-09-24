@@ -1,0 +1,342 @@
+{
+  "metadata": {
+    "utc": "2026-09-24T13:24:00.238287+00:00",
+    "mode": "agent",
+    "judge": "llm",
+    "git_commit": "eba80576e3d2ede42a2d1149ebfba9f6c2ef6970",
+    "working_tree_dirty": true,
+    "dataset_sha256": "45461f2a261d170cebaec3ebe5a286d13312e80b558ad702343167bb2f60aa09",
+    "dataset_cases": 18,
+    "index_sha256": "f592e824fa9bf1c7a6a3d63a4642e80dd107eb81b196e103b0566a9f4581c0fa",
+    "configuration": {
+      "ollama_url": "redacted",
+      "model": "qwen2.5:3b",
+      "judge_model": "qwen2.5:3b",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "reranker_model": "cross-encoder/ms-marco-MiniLM-L6-v2",
+      "index": ".rag/index",
+      "memory": ".rag/preferences.sqlite3",
+      "traces": ".rag/traces"
+    },
+    "generator_digest": null,
+    "judge_digest": null,
+    "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "reranker_revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+    "python": "3.12.14",
+    "platform": "macOS-14.2.1-arm64-arm-64bit",
+    "packages": {
+      "langgraph": "1.2.12",
+      "rank-bm25": "0.2.2",
+      "sentence-transformers": "5.7.0",
+      "numpy": "2.5.3",
+      "torch": "2.14.0"
+    },
+    "experiments": [
+      {
+        "name": "baseline",
+        "rerank": false,
+        "candidate_k": 8,
+        "top_k": 3
+      },
+      {
+        "name": "improved",
+        "rerank": true,
+        "candidate_k": 8,
+        "top_k": 3
+      }
+    ]
+  },
+  "summary": {
+    "baseline": {
+      "cases": 18,
+      "completed": 0,
+      "recall_at_3": null,
+      "recall_at_3_n": 0,
+      "reciprocal_rank": null,
+      "reciprocal_rank_n": 0,
+      "latency_ms": null,
+      "latency_ms_n": 0,
+      "correctness": null,
+      "correctness_n": 0,
+      "groundedness": null,
+      "groundedness_n": 0,
+      "relevance": null,
+      "relevance_n": 0,
+      "route_correct": null,
+      "route_correct_n": 0
+    },
+    "improved": {
+      "cases": 18,
+      "completed": 0,
+      "recall_at_3": null,
+      "recall_at_3_n": 0,
+      "reciprocal_rank": null,
+      "reciprocal_rank_n": 0,
+      "latency_ms": null,
+      "latency_ms_n": 0,
+      "correctness": null,
+      "correctness_n": 0,
+      "groundedness": null,
+      "groundedness_n": 0,
+      "relevance": null,
+      "relevance_n": 0,
+      "route_correct": null,
+      "route_correct_n": 0
+    }
+  },
+  "improved_minus_baseline": {},
+  "results": [
+    {
+      "configuration": "baseline",
+      "case_id": "ingestion",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "rebuild",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "overlap",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "hybrid",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "fusion",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "reranker",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "latency",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "recall",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "judge",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "memory",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "trace",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "tool_owner",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "tool_tier",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "injection",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "tool_abuse",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "unknown",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "followup",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "baseline",
+      "case_id": "preference",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "ingestion",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "rebuild",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "overlap",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "hybrid",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "fusion",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "reranker",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "latency",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "recall",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "judge",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "memory",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "trace",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "tool_owner",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "tool_tier",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "injection",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "tool_abuse",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "unknown",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "followup",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    },
+    {
+      "configuration": "improved",
+      "case_id": "preference",
+      "status": "unavailable",
+      "judgment_status": "unavailable",
+      "reason": "Configured Ollama model is unavailable"
+    }
+  ]
+}
