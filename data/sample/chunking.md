@@ -1,0 +1,2 @@
+# Chunk size and overlap
+Chunk overlap repeats words from the end of a passage at the beginning of the next one. It helps preserve context at boundaries, at the cost of redundant passages and a larger index. The default is a 160-word window with 30-word overlap. Increase context only when evaluation suggests it helps. Word windows can split headings and sentences; structure-aware splitting is future work. Cross-encoder token limits can truncate longer inputs, so chunk size must be tuned for the actual tokenizer.

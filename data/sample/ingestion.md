@@ -1,0 +1,3 @@
+# Ingestion and rebuilds
+The application ingests UTF-8 Markdown and text files in sorted path order. It uses 160-word chunks with 30 words of overlap by default. Each chunk retains a relative source path, ordinal, and content-derived identifier. Empty documents are skipped. Symlinked files outside the document root are not ingested.
+Sentence embeddings are normalized before storage. A single compressed NumPy artifact stores vectors and a JSON manifest; BM25 is rebuilt from those same chunks when the index is loaded. Atomic artifact replacement avoids mixing vectors and metadata. Rebuild after changing documents or embedding models. The manifest fingerprint identifies the actual chunks and vectors; it does not promise bitwise equality across hardware or model revisions.

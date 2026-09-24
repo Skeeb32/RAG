@@ -1,0 +1,3 @@
+# Safety boundaries
+The input guard blocks basic instruction-override and hidden-prompt requests. Retrieved passages matching known injection patterns are filtered before generation. Tool names and arguments are validated against a strict allowlist. The service catalog accepts a service identifier, never arbitrary SQL. The database is opened read-only for lookups and queries are parameterized.
+The output guard rejects empty answers, obvious secret patterns, internal-policy markers, and missing or invalid citations. It does not prove semantic faithfulness or stop sophisticated prompt injection. Instructions inside retrieved documents remain untrusted. A production deployment also needs identity, authorization, rate limits, sandboxing and monitoring.

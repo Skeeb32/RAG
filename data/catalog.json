@@ -1,0 +1,20 @@
+[
+  {
+    "service": "atlas-api",
+    "owner": "Platform Team",
+    "tier": "1",
+    "runbook": "RB-ATLAS"
+  },
+  {
+    "service": "beacon-worker",
+    "owner": "Data Systems",
+    "tier": "2",
+    "runbook": "RB-BEACON"
+  },
+  {
+    "service": "cedar-index",
+    "owner": "Search Team",
+    "tier": "1",
+    "runbook": "RB-CEDAR"
+  }
+]

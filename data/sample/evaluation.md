@@ -1,0 +1,3 @@
+# Evaluation methodology
+Recall@3 measures the fraction of annotated relevant source documents appearing in the top three results. Reciprocal rank measures how early the first relevant source appears. Source-level labels are coarser than chunk-level labels. The harness uses the same labeled questions for baseline and improved configurations.
+The optional LLM judge scores correctness, relevance and groundedness from zero to one using the expected answer and evidence. These subjective scores may be biased by wording, the judge model, or shared generator and judge weaknesses. Temperature zero and a fixed seed reduce variation without guaranteeing determinism. Use human review and a larger held-out dataset before drawing general conclusions.

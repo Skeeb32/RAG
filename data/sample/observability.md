@@ -1,0 +1,3 @@
+# Execution traces
+Each agent run creates a JSON trace with a random run identifier, ordered node events, elapsed timings, result counts, selected route, and success flags. The trace covers the input guard, decision, retrieval or service lookup, reranking, context assembly, generation, output guard and final response. Exceptions produce a failure event.
+Traces intentionally omit user questions, conversation history, preferences, raw tool arguments, tool results, answers and system prompts. This makes them useful for execution debugging without creating a second copy of private content. Detailed output is returned to the caller but not persisted by the trace writer. Trace files have no automatic retention policy in this local project.

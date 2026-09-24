@@ -1,0 +1,3 @@
+# Hybrid retrieval
+BM25 is lexical retrieval implemented with rank-bm25 BM25Okapi. It is useful for exact identifiers and terms, but can miss paraphrases. The semantic branch uses all-MiniLM-L6-v2 sentence embeddings and exact cosine similarity over normalized vectors. Semantic retrieval can match similar meaning without the same words, but may retrieve plausible irrelevant passages.
+Reciprocal rank fusion combines both ranked lists with a constant of 60. A candidate contributes 1 divided by 60 plus its rank for each list in which it appears. The system selects up to eight fused candidates. Exact NumPy vector search is sufficient for the small knowledge base; larger collections need an index with better search scaling.

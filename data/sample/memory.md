@@ -1,0 +1,3 @@
+# Conversation and preference memory
+Conversation history is short-term memory held in the current Python process. The last three question-answer pairs are passed to the model to resolve follow-up questions. User and session identifiers isolate conversations; only successful or abstained answers are retained. Restarting the process clears conversation history.
+Persistent preferences are stored in SQLite and scoped by user. They are changed explicitly with the preference command, not silently inferred from conversation. Supported preferences are verbosity (concise or detailed) and examples (python or plain). The forget command deletes a user's preferences; /forget in interactive chat also clears their active histories. Local user labels are not authentication.

@@ -1,0 +1,3 @@
+# Operations and failure handling
+Run ingestion before asking questions. The agent needs a running Ollama server and a tool-capable model. Embedding and reranking models are downloaded on first use; later runs can use cached weights. CPU inference avoids a GPU requirement but can be slow.
+If the generation server is unavailable or a tool decision is malformed, the application returns an explicit error rather than inventing an answer. If the service catalog is missing, the lookup returns a structured catalog_unavailable error. Unsupported service names are rejected by validation. No automatic retries execute extra tool calls. Each question permits one validated tool decision and one generation call.
