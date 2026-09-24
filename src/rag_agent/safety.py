@@ -1,4 +1,5 @@
 """Small, deliberately limited input/evidence/output checks."""
+
 import re
 
 REFUSAL = "I cannot follow requests to override instructions or expose internal information."

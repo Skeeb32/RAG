@@ -1,4 +1,5 @@
 """Bounded in-process conversation history and explicit persistent preferences."""
+
 import sqlite3
 from collections import OrderedDict
 from pathlib import Path
@@ -16,8 +17,10 @@ class Memory:
         self.max_sessions = max_sessions
         self.sessions: OrderedDict[tuple[str, str], list[dict[str, str]]] = OrderedDict()
         with sqlite3.connect(path) as db:
-            db.execute("CREATE TABLE IF NOT EXISTS preferences "
-                       "(user TEXT, key TEXT, value TEXT, PRIMARY KEY(user, key))")
+            db.execute(
+                "CREATE TABLE IF NOT EXISTS preferences "
+                "(user TEXT, key TEXT, value TEXT, PRIMARY KEY(user, key))"
+            )
 
     def set_preference(self, user: str, key: str, value: str) -> None:
         if key not in PREFERENCE_VALUES or value not in PREFERENCE_VALUES[key]:
@@ -45,8 +48,12 @@ class Memory:
     def append(self, user: str, session: str, question: str, answer: str) -> None:
         key = (user, session)
         history = self.sessions.setdefault(key, [])
-        history.extend([{"role": "user", "content": question[:4000]},
-                        {"role": "assistant", "content": answer[:4000]}])
+        history.extend(
+            [
+                {"role": "user", "content": question[:4000]},
+                {"role": "assistant", "content": answer[:4000]},
+            ]
+        )
         self.sessions[key] = history[-6:]
         self.sessions.move_to_end(key)
         while len(self.sessions) > self.max_sessions:

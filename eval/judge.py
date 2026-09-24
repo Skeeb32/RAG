@@ -1,4 +1,5 @@
 """Optional real LLM judge. Invalid or unavailable scores are never coerced to zero."""
+
 import json
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -23,12 +24,23 @@ def judge_answer(model: ChatModel, case: dict, result: dict) -> dict:
         "0 unsupported). A justified refusal/abstention can receive 1. Partial support earns "
         "partial credit. Explain briefly. Do not reward verbosity."
     )
-    response = model.chat([
-        {"role": "system", "content": instructions},
-        {"role": "user", "content": json.dumps({
-            "question": case["question"], "reference": case["expected"],
-            "criteria": case["criteria"], "prior_questions": case.get("prior_questions", []),
-            "answer": result["answer"], "evidence": result["sources"],
-        })},
-    ], format_schema=Judgment.model_json_schema())
+    response = model.chat(
+        [
+            {"role": "system", "content": instructions},
+            {
+                "role": "user",
+                "content": json.dumps(
+                    {
+                        "question": case["question"],
+                        "reference": case["expected"],
+                        "criteria": case["criteria"],
+                        "prior_questions": case.get("prior_questions", []),
+                        "answer": result["answer"],
+                        "evidence": result["sources"],
+                    }
+                ),
+            },
+        ],
+        format_schema=Judgment.model_json_schema(),
+    )
     return Judgment.model_validate_json(response["content"]).model_dump()

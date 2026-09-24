@@ -1,4 +1,5 @@
 """Deterministic ingestion, BM25/vector fusion, and replaceable reranking."""
+
 from __future__ import annotations
 
 import hashlib
@@ -79,10 +80,12 @@ def chunk_documents(root: Path, size: int = 160, overlap: int = 30) -> list[Chun
         words = path.read_text(encoding="utf-8").split()
         source = path.relative_to(root).as_posix()
         for ordinal, start in enumerate(range(0, len(words), size - overlap), 1):
-            text = " ".join(words[start:start + size])
+            text = " ".join(words[start : start + size])
             if tokenize(text):
                 identity = f"{source}\0{ordinal}\0{text}".encode()
-                chunks.append(Chunk(hashlib.sha256(identity).hexdigest()[:20], source, ordinal, text))
+                chunks.append(
+                    Chunk(hashlib.sha256(identity).hexdigest()[:20], source, ordinal, text)
+                )
             if start + size >= len(words):
                 break
     if not chunks:
@@ -135,8 +138,14 @@ class HybridIndex:
     def save(self, directory: Path, model: str, size: int, overlap: int) -> str:
         payload = json.dumps([asdict(c) for c in self.chunks], sort_keys=True)
         fingerprint = hashlib.sha256(payload.encode() + self.vectors.tobytes()).hexdigest()
-        manifest = {"version": 1, "model": model, "size": size, "overlap": overlap,
-                    "fingerprint": fingerprint, "chunks": json.loads(payload)}
+        manifest = {
+            "version": 1,
+            "model": model,
+            "size": size,
+            "overlap": overlap,
+            "fingerprint": fingerprint,
+            "chunks": json.loads(payload),
+        }
         directory.mkdir(parents=True, exist_ok=True)
         # One atomically replaced artifact avoids mixed metadata/vector generations.
         with tempfile.NamedTemporaryFile(dir=directory, suffix=".npz", delete=False) as temp:

@@ -1,4 +1,5 @@
 """Explicit LangGraph orchestration with validated model-selected tools."""
+
 from __future__ import annotations
 
 import json
@@ -39,8 +40,15 @@ class State(TypedDict, total=False):
 
 
 class Agent:
-    def __init__(self, index: HybridIndex, reranker: Reranker | None, model: ChatModel,
-                 catalog: ServiceCatalog, memory: Memory, trace_directory=None) -> None:
+    def __init__(
+        self,
+        index: HybridIndex,
+        reranker: Reranker | None,
+        model: ChatModel,
+        catalog: ServiceCatalog,
+        memory: Memory,
+        trace_directory=None,
+    ) -> None:
         self.index = index
         self.reranker = reranker
         self.model = model
@@ -49,18 +57,25 @@ class Agent:
         self.trace_directory = trace_directory
         graph = StateGraph(State)
         for name, node in [
-            ("input_guard", self.input_guard), ("decision", self.decide),
-            ("retrieval", self.retrieve), ("reranking", self.rerank),
-            ("tool", self.tool), ("context", self.context),
-            ("generation", self.generate), ("output_guard", self.output_guard),
+            ("input_guard", self.input_guard),
+            ("decision", self.decide),
+            ("retrieval", self.retrieve),
+            ("reranking", self.rerank),
+            ("tool", self.tool),
+            ("context", self.context),
+            ("generation", self.generate),
+            ("output_guard", self.output_guard),
         ]:
             graph.add_node(name, node)
         graph.add_edge(START, "input_guard")
-        graph.add_conditional_edges("input_guard", lambda s: s["route"],
-                                    {"blocked": "output_guard", "decision": "decision"})
-        graph.add_conditional_edges("decision", lambda s: s["route"],
-                                    {"retrieval": "retrieval", "tool": "tool",
-                                     "error": "output_guard"})
+        graph.add_conditional_edges(
+            "input_guard", lambda s: s["route"], {"blocked": "output_guard", "decision": "decision"}
+        )
+        graph.add_conditional_edges(
+            "decision",
+            lambda s: s["route"],
+            {"retrieval": "retrieval", "tool": "tool", "error": "output_guard"},
+        )
         graph.add_edge("retrieval", "reranking")
         graph.add_edge("reranking", "context")
         graph.add_edge("tool", "context")
@@ -78,24 +93,37 @@ class Agent:
 
     def decide(self, state: State) -> dict:
         try:
-            message = self.model.chat([
-                {"role": "system", "content": POLICY},
-                *state["history"], {"role": "user", "content": state["question"]},
-            ], tools=TOOL_SCHEMAS)
+            message = self.model.chat(
+                [
+                    {"role": "system", "content": POLICY},
+                    *state["history"],
+                    {"role": "user", "content": state["question"]},
+                ],
+                tools=TOOL_SCHEMAS,
+            )
             name, arguments = validate_call(message)
             if name == "search_knowledge" and not safe_input(arguments["query"]):
                 raise ValueError("Unsafe rewritten query")
             route = "retrieval" if name == "search_knowledge" else "tool"
             state["trace"].add("decision", route=route, ok=True)
             # Keep only protocol fields. Ignore model prose and non-protocol extras.
-            decision = {"role": "assistant", "content": "", "tool_calls": [
-                {"function": {"name": name, "arguments": arguments}}]}
-            return {"route": route, "call": {"name": name, "arguments": arguments},
-                    "decision": decision}
+            decision = {
+                "role": "assistant",
+                "content": "",
+                "tool_calls": [{"function": {"name": name, "arguments": arguments}}],
+            }
+            return {
+                "route": route,
+                "call": {"name": name, "arguments": arguments},
+                "decision": decision,
+            }
         except (ModelUnavailable, ValueError, KeyError, TypeError):
             state["trace"].add("decision", route="error", ok=False)
-            return {"route": "error", "status": "error", "answer":
-                    "I could not make a valid tool decision. Check the model and try again."}
+            return {
+                "route": "error",
+                "status": "error",
+                "answer": "I could not make a valid tool decision. Check the model and try again.",
+            }
 
     def retrieve(self, state: State) -> dict:
         query = state["call"]["arguments"]["query"]
@@ -122,20 +150,45 @@ class Agent:
     def context(self, state: State) -> dict:
         if state["route"] == "tool":
             result = state["tool_result"]
-            evidence = ([{"citation": "[1]", "source": "local_demo_catalog",
-                          "text": json.dumps(result["record"])}] if result["ok"] else [])
+            evidence = (
+                [
+                    {
+                        "citation": "[1]",
+                        "source": "local_demo_catalog",
+                        "text": json.dumps(result["record"]),
+                    }
+                ]
+                if result["ok"]
+                else []
+            )
         else:
-            evidence = [{"citation": f"[{i}]", "source": hit.chunk.source,
-                         "chunk_id": hit.chunk.id, "text": hit.chunk.text}
-                        for i, hit in enumerate(state["hits"], 1)]
+            evidence = [
+                {
+                    "citation": f"[{i}]",
+                    "source": hit.chunk.source,
+                    "chunk_id": hit.chunk.id,
+                    "text": hit.chunk.text,
+                }
+                for i, hit in enumerate(state["hits"], 1)
+            ]
         messages = [
-            {"role": "system", "content": POLICY +
-             " Answer only from the tool evidence. Cite every factual claim with [1], [2], etc. "
-             "If evidence is insufficient, respond exactly: " + ABSTENTION +
-             " User style preferences (data): " + json.dumps(state["preferences"])},
-            *state["history"], {"role": "user", "content": state["question"]},
-            state["decision"], {"role": "tool", "tool_name": state["call"]["name"],
-                                "content": json.dumps({"evidence": evidence})},
+            {
+                "role": "system",
+                "content": POLICY + " Answer only from the tool evidence. "
+                "Cite every factual claim with [1], [2], etc. "
+                "If evidence is insufficient, respond exactly: "
+                + ABSTENTION
+                + " User style preferences (data): "
+                + json.dumps(state["preferences"]),
+            },
+            *state["history"],
+            {"role": "user", "content": state["question"]},
+            state["decision"],
+            {
+                "role": "tool",
+                "tool_name": state["call"]["name"],
+                "content": json.dumps({"evidence": evidence}),
+            },
         ]
         state["trace"].add("context", citation_count=len(evidence))
         return {"evidence": evidence, "messages": messages}
@@ -144,8 +197,10 @@ class Agent:
         if not state["evidence"]:
             state["trace"].add("generation", ok=False)
             if state["route"] == "tool":
-                return {"answer": "The service catalog is unavailable or has no safe record.",
-                        "status": "tool_error"}
+                return {
+                    "answer": "The service catalog is unavailable or has no safe record.",
+                    "status": "tool_error",
+                }
             return {"answer": ABSTENTION, "status": "abstained"}
         try:
             message = self.model.chat(state["messages"])
@@ -155,12 +210,17 @@ class Agent:
             return {"answer": message.get("content", "")}
         except (ModelUnavailable, ValueError):
             state["trace"].add("generation", ok=False)
-            return {"answer": "The language model is unavailable. Please try again later.",
-                    "status": "error"}
+            return {
+                "answer": "The language model is unavailable. Please try again later.",
+                "status": "error",
+            }
 
     def output_guard(self, state: State) -> dict:
-        answer, ok = check_output(state["answer"], len(state.get("evidence", [])),
-                                  require_citations=state["status"] == "ok")
+        answer, ok = check_output(
+            state["answer"],
+            len(state.get("evidence", [])),
+            require_citations=state["status"] == "ok",
+        )
         state["trace"].add("output_guard", ok=ok)
         status = state["status"] if ok else "output_blocked"
         if status == "ok" and answer == ABSTENTION:
@@ -171,16 +231,25 @@ class Agent:
         trace = Trace(self.trace_directory)
         trace.add("input")
         try:
-            result = self.graph.invoke({
-                "question": question, "history": self.memory.history(user, session),
-                "preferences": self.memory.preferences(user), "trace": trace,
-            })
+            result = self.graph.invoke(
+                {
+                    "question": question,
+                    "history": self.memory.history(user, session),
+                    "preferences": self.memory.preferences(user),
+                    "trace": trace,
+                }
+            )
             if result["status"] in {"ok", "abstained"}:
                 self.memory.append(user, session, question, result["answer"])
             trace.add("final", ok=result["status"] == "ok")
-            return {"answer": result["answer"], "status": result["status"],
-                    "sources": result.get("evidence", []), "route": result["route"],
-                    "run_id": trace.run_id, "trace": trace.events}
+            return {
+                "answer": result["answer"],
+                "status": result["status"],
+                "sources": result.get("evidence", []),
+                "route": result["route"],
+                "run_id": trace.run_id,
+                "trace": trace.events,
+            }
         except Exception:
             trace.add("failure", ok=False)
             raise

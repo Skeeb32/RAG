@@ -1,4 +1,5 @@
 """Command-line entry points for ingestion, retrieval, chat, and preferences."""
+
 import argparse
 import json
 from dataclasses import asdict
@@ -25,11 +26,14 @@ def load_index(settings: Settings) -> HybridIndex:
 
 
 def make_agent(settings: Settings, rerank: bool = True) -> Agent:
-    return Agent(load_index(settings),
-                 CrossEncoderReranker(settings.reranker_model) if rerank else None,
-                 OllamaModel(settings.ollama_url, settings.model),
-                 ServiceCatalog(settings.index / "catalog.sqlite3"),
-                 Memory(settings.memory), settings.traces)
+    return Agent(
+        load_index(settings),
+        CrossEncoderReranker(settings.reranker_model) if rerank else None,
+        OllamaModel(settings.ollama_url, settings.model),
+        ServiceCatalog(settings.index / "catalog.sqlite3"),
+        Memory(settings.memory),
+        settings.traces,
+    )
 
 
 def main() -> None:
@@ -63,8 +67,9 @@ def main() -> None:
             chunks = chunk_documents(args.docs, args.chunk_size, args.overlap)
             encoder = SentenceEncoder(settings.embedding_model)
             index = HybridIndex(chunks, encoder.encode([c.text for c in chunks]), encoder)
-            fingerprint = index.save(settings.index, settings.embedding_model,
-                                     args.chunk_size, args.overlap)
+            fingerprint = index.save(
+                settings.index, settings.embedding_model, args.chunk_size, args.overlap
+            )
             seed_catalog(args.catalog, settings.index / "catalog.sqlite3")
             print(json.dumps({"chunks": len(chunks), "fingerprint": fingerprint}))
         elif args.command == "search":
@@ -84,7 +89,10 @@ def main() -> None:
             if args.command == "ask":
                 print(json.dumps(agent.ask(args.question, args.user, args.session), indent=2))
             else:
-                print("Ask about the knowledge base or service catalog. /quit exits; /forget clears memory.")
+                print(
+                    "Ask about the knowledge base or service catalog. "
+                    "/quit exits; /forget clears memory."
+                )
                 while True:
                     try:
                         question = input("> ")
